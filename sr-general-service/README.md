@@ -24,8 +24,7 @@
 ```bash
 ./gradlew localBootRun
 ```
-
-Команда поднимает Postgres, Redis, nginx и Ganache из `src/main/resources/docker-compose-local.yml`, затем запускает приложение с профилем `local`.
+Поднимается Postgres, Redis, nginx и Ganache из `src/main/resources/docker-compose-local.yml`, затем запускает приложение с профилем `local`.
 
 Прямой адрес backend: `http://localhost:8081`.
 Адрес через nginx: `http://localhost`.
