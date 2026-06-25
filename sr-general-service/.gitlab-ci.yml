@@ -1,0 +1,36 @@
+stages:
+  - test
+  - build
+
+image: eclipse-temurin:21-jdk
+
+variables:
+  GRADLE_USER_HOME: "$CI_PROJECT_DIR/.gradle"
+
+cache:
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+
+test:
+  stage: test
+  script:
+    - chmod +x gradlew
+    - ./gradlew test jacocoTestReport
+  artifacts:
+    when: always
+    reports:
+      junit: build/test-results/test/*.xml
+    paths:
+      - build/reports/jacoco/test/
+
+build:
+  stage: build
+  script:
+    - chmod +x gradlew
+    - ./gradlew bootJar
+  artifacts:
+    paths:
+      - build/libs/roadcheck.jar
+    expire_in: 1 week

@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/26/changelog26001.sql
+  - include:
+      file: liquibase/26/changelog26002.sql
+  - include:
+      file: liquibase/26/changelog26003.sql
+  - include:
+      file: liquibase/26/changelog26004.sql
+  - include:
+      file: liquibase/26/changelog26005.sql
+  - include:
+      file: liquibase/26/changelog26006.sql
+  - include:
+      file: liquibase/26/changelog26007.sql
+  - include:
+      file: liquibase/26/changelog26008.sql
+  - include:
+      file: liquibase/26/changelog26009.sql
+  - include:
+      file: liquibase/26/changelog26010.sql
+  - include:
+      file: liquibase/26/changelog26011.sql

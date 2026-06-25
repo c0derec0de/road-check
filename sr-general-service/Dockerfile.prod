@@ -1,0 +1,33 @@
+FROM gradle:8.10.2-jdk21 AS builder
+WORKDIR /workspace
+COPY --chown=gradle:gradle . .
+RUN gradle --no-daemon clean bootJar
+
+FROM eclipse-temurin:21-jre-alpine
+
+RUN apk add --no-cache python3 py3-pip python3-dev g++ make libffi-dev cmake openblas-dev
+
+RUN pip install --no-cache-dir --break-system-packages \
+    numpy \
+    pandas \
+    sqlalchemy \
+    scikit-learn \
+    joblib \
+    xgboost \
+    tqdm \
+    psycopg2-binary
+
+RUN addgroup -S spring && adduser -S spring -G spring
+WORKDIR /opt/app
+
+RUN mkdir -p /opt/app/src/main/resources/scripts /opt/app/ml_models
+
+COPY --from=builder /workspace/build/libs/*.jar app.jar
+COPY src/main/resources/scripts/ /opt/app/src/main/resources/scripts/
+
+RUN chown -R spring:spring /opt/app && chmod -R 775 /opt/app/ml_models
+
+USER spring:spring
+
+EXPOSE 8081
+ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-Duser.dir=/opt/app", "-jar", "/opt/app/app.jar"]

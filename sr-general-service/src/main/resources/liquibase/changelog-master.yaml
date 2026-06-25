@@ -1,0 +1,3 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/26/_changelog-26.yml

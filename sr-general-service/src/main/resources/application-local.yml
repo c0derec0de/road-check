@@ -1,0 +1,57 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  datasource:
+    url: ${DB_URL_LOCAL:jdbc:postgresql://localhost:5433/roadcheck?connecttimeout=10&currentschema=public}
+    username: ${DB_USERNAME:roadcheck}
+    password: ${DB_PASSWORD:roadcheck}
+    driver-class-name: org.postgresql.Driver
+    maximum-pool-size: 5
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        default_schema: public
+        format_sql: true
+        highlight_sql: true
+        hibernate.hbm2ddl.extra_physical_table_types: table
+
+  liquibase:
+    enabled: true
+    drop-first: false
+    default-schema: public
+    change-log: classpath:liquibase/changelog-master.yaml
+
+  cache:
+    type: redis
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+
+server:
+  port: ${SERVER_PORT:8081}
+
+management:
+  health:
+    redis:
+      enabled: true
+
+logging:
+  level:
+    org.hibernate.sql: debug
+    org.hibernate.orm.jdbc.bind: trace
+    dev.roadcheck: debug
+
+blockchain:
+  enabled: ${BLOCKCHAIN_ENABLED:true}
+  rpc-url: ${BLOCKCHAIN_RPC_URL:http://localhost:8545}
+  private-key: ${BLOCKCHAIN_PRIVATE_KEY:ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80}
+

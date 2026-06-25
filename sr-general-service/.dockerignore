@@ -1,0 +1,16 @@
+# technical staff
+.idea
+.git
+.gradle
+gradle
+out
+gradlew
+gradlew.bat
+
+build
+!build/libs/roadcheck.jar
+!build/resources/main/META-INF/apt-version
+
+libs
+
+external-xsd-models

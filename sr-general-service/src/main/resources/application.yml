@@ -1,0 +1,125 @@
+spring:
+  application:
+    name: roadcheck
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/roadcheck?connectTimeout=10&socketTimeout=1800&currentSchema=public}
+    username: ${DB_USERNAME:roadcheck}
+    password: ${DB_PASSWORD:roadcheck}
+    driver-class-name: org.postgresql.Driver
+    pool-name: main_db_pool
+    maximum-pool-size: 10
+    minimum-idle: 1
+    leak-detection-threshold: 900000
+    logging:
+      enable: false
+    hikari:
+      maximum-lifetime: 540000
+      connection-timeout: 20000
+      validation-timeout: 5000
+
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+
+  sql:
+    init:
+      mode: never
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    properties:
+      hibernate:
+        default_schema: public
+        hibernate.hbm2ddl.extra_physical_table_types: TABLE
+        jdbc:
+          batch_size: 50
+          order_inserts: true
+          order_updates: true
+          time_zone: UTC
+    open-in-view: false
+
+  liquibase:
+    enabled: true
+    drop-first: false
+    default-schema: public
+    change-log: classpath:liquibase/changelog-master.yaml
+
+  mvc:
+    format:
+      date: yyyy-MM-dd
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  cache:
+    type: redis
+
+server:
+  port: ${SERVER_PORT:8081}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,metrics,threaddump,heapdump
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+
+logging:
+  level:
+    org.springframework: WARN
+    org.hibernate: WARN
+    dev.roadcheck: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+app:
+  features: {}
+
+blockchain:
+  enabled: ${BLOCKCHAIN_ENABLED:false}
+  rpc-url: ${BLOCKCHAIN_RPC_URL:http://localhost:8545}
+  private-key: ${BLOCKCHAIN_PRIVATE_KEY:}
+
+jwt:
+  secret: ${JWT_SECRET:roadcheck-jwt-secret-key-min-256-bits-for-hs256-algorithm}
+  expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+  issuer: ${JWT_ISSUER:roadcheck}
+
+jobs:
+  predictions:
+    interval-minutes: ${JOBS_PREDICTIONS_INTERVAL_MINUTES:10}
+    script:
+      path: ${JOBS_PREDICTIONS_SCRIPT_PATH:src/main/resources/scripts/risk.py}
+  reports:
+    archive-cron: ${JOBS_REPORTS_ARCHIVE_CRON:0 0 0 * * ?}
+
+caching: {}
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+    display-request-duration: true
+    doc-expansion: none
+    try-it-out-enabled: true
+    persistAuthorization: true
+    syntax-highlight:
+      activated: true
+
+web-clients: {}
+
+bot:
+  api-token: ${BOT_API_TOKEN:X-API-TOKEN}
+

@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "types": ["jest", "node", "@testing-library/jest-dom", "vite/client"],
+    "module": "es2020",
+    "verbatimModuleSyntax": false,
+    "esModuleInterop": true
+  },
+  "include": ["src"]
+}

@@ -1,0 +1,124 @@
+build:
+  maxIssues: 0
+
+empty-blocks:
+  EmptyFunctionBlock:
+    ignoreOverridden: true
+
+exceptions:
+  InstanceOfCheckForException:
+    active: false
+  TooGenericExceptionCaught:
+    excludes: [ '**/test*/**' ]
+    exceptionNames:
+      - ArrayIndexOutOfBoundsException
+      - Error
+      - IllegalMonitorStateException
+      - NullPointerException
+      - IndexOutOfBoundsException
+      - RuntimeException
+      - Throwable
+
+complexity:
+  CyclomaticComplexMethod:
+    active: false
+  CognitiveComplexMethod:
+    active: true
+  LargeClass:
+    active: false
+  LongMethod:
+    active: false
+  LongParameterList:
+    active: false
+    ignoreAnnotated: [ javax.persistence.Entity ]
+  NestedBlockDepth:
+    threshold: 5
+  TooManyFunctions:
+    active: false
+    ignoreOverridden: true
+
+formatting:
+  NoWildcardImports:
+    active: false # https://ktor.io/quickstart/code-style.html#with-star-imports
+  MaximumLineLength:
+    maxLineLength: 140
+  PackageName:
+    active: false # PackageNaming detekt rule is used instead
+  ParameterListWrapping:
+    maxLineLength: 140
+  ArgumentListWrapping:
+    active: false
+  AnnotationOnSeparateLine:
+    active: false
+  Filename:
+    active: false # MatchingDeclarationName detekt rule is used instead
+  ParameterWrapping:
+    active: false
+  PropertyWrapping:
+    active: false
+  FunctionReturnTypeSpacing:
+    active: false
+  UnnecessaryParenthesesBeforeTrailingLambda:
+    active: false
+  NoSemicolons:
+    active: false
+  Wrapping:
+    active: false
+  Indentation:
+    active: false
+
+naming:
+  FunctionNaming:
+    excludes: [ '**/test*/**', '**/*Repository.kt' ]
+  PackageNaming:
+    excludes: [ '**/test*/**' ]
+
+style:
+  ForbiddenComment:
+    active: true
+    comments:
+      - 'FIXME:'
+      - 'STOPSHIP:'
+  MagicNumber:
+    active: false
+    excludes: [ '**/test*/**' ]
+  MaxLineLength:
+    active: false # MaximumLineLength klint wrapper rule is used instead
+    maxLineLength: 140
+  ProtectedMemberInFinalClass:
+    active: false
+  ReturnCount:
+    active: false
+  ThrowsCount:
+    active: false
+  UnnecessaryAbstractClass:
+    excludes: [ '**/test*/**' ]
+  WildcardImport:
+    active: false # https://ktor.io/quickstart/code-style.html#with-star-imports
+  UnusedPrivateMember:
+    active: true
+    excludes: [ '**/test*/**' ]
+    allowedNames: '(_|ignored|expected|serialVersionUID)'
+    ignoreAnnotated:
+      - 'PathVariable'
+      - 'RequestParam'
+      - 'CachePut'
+      - 'Bean'
+      - 'JsonValue'
+      - 'EventListener'
+  SerialVersionUIDInSerializableClass:
+    active: false
+  DestructuringDeclarationWithTooManyEntries:
+    active: false
+  UseRequire:
+    active: false
+  UnusedImports:
+    active: true
+  UnusedParameter:
+    active: false
+  UnusedPrivateProperty:
+    active: false
+
+potential-bugs:
+  ImplicitDefaultLocale:
+    active: false

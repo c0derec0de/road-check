@@ -1,0 +1,63 @@
+dependencies {
+    // Spring Boot
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+    implementation("org.springframework.boot:spring-boot-starter-quartz")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
+    implementation("org.springframework.kafka:spring-kafka")
+
+    // Database
+    implementation("org.liquibase:liquibase-core:${property("liquibaseVersion")}")
+    runtimeOnly("org.postgresql:postgresql")
+    runtimeOnly("com.h2database:h2")
+
+    // Kotlin
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    // Jackson
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+
+    // OpenAPI / Swagger
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${property("springDocVersion")}")
+
+    // Markdown rendering for documentation
+    implementation("org.commonmark:commonmark:0.21.0")
+    implementation("org.commonmark:commonmark-ext-gfm-tables:0.21.0")
+
+    // Caching
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("io.lettuce:lettuce-core")
+
+    // Blockchain (Web3j for Ethereum/Ganache)
+    implementation("org.web3j:core:4.10.3")
+
+    // JWT
+    implementation("io.jsonwebtoken:jjwt-api:0.12.3")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.3")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.3")
+
+    // Detekt
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${property("detektVersion")}")
+
+    // Testing
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.security:spring-security-test")
+
+    // Testcontainers
+    testImplementation("org.testcontainers:testcontainers:${property("testcontainersVersion")}")
+    testImplementation("org.testcontainers:postgresql:${property("testcontainersVersion")}")
+    testImplementation("org.testcontainers:junit-jupiter:${property("testcontainersVersion")}")
+    testRuntimeOnly 'org.hsqldb:hsqldb:2.7.1'
+
+    // Mocking
+    testImplementation("io.mockk:mockk:${property("mockkVersion")}")
+    testImplementation("com.ninja-squad:springmockk:${property("springMockkVersion")}")
+
+    //Logging
+    implementation("io.github.oshai:kotlin-logging-jvm:${property("kotlinLoggingVersion")}")
+}
