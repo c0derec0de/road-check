@@ -25,7 +25,7 @@ Road Check — платформа мониторинга для сбора и а
 - Kotlin, Spring Boot, Gradle;
 - PostgreSQL, Redis, Liquibase;
 - React, TypeScript, Vite;
-- Python, `vk-api`, `psycopg2`;
+- Python, vk-api, psycopg2;
 - Docker и Docker Compose.
 
 ## Запуск
